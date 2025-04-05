@@ -6,7 +6,11 @@ import re
 
 import frappe
 from frappe.defaults import get_user_default
-from frappe.integrations.frappe_providers.frappecloud_billing import is_fc_site
+try:
+    from frappe.integrations.frappe_providers.frappecloud_billing import is_fc_site
+except ModuleNotFoundError:
+    def is_fc_site():
+        return False
 
 from insights.api.telemetry import track_active_site
 
